@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>First Meet — Sugi &amp; Arun</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep: #0D050A;
+    --bg-dark: #150812;
+    --bg-surface: #1E0D1B;
+    --bg-surface-hover: #291225;
+    --paper: #FFF7F0;
+    --paper-soft: #E8D3DC;
+    --rose: #F09CB8;
+    --rose-mid: #E876A2;
+    --rose-deep: #E05791;
+    --wine-soft: #D4A5BC;
+    --gold: #F2C366;
+    --gold-pale: #F8E59E;
+    --gold-deep: #D49D35;
+    --border-subtle: rgba(229, 111, 155, 0.22);
+    --border-gold: rgba(242, 195, 102, 0.3);
+  }
+  *{ box-sizing: border-box; margin: 0; padding: 0; }
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 50% 0%, rgba(221, 95, 146, 0.18), transparent 60%),
+      radial-gradient(ellipse 700px 600px at 100% 40%, rgba(217, 164, 65, 0.12), transparent 55%),
+      radial-gradient(ellipse 800px 600px at 0% 90%, rgba(224, 87, 145, 0.10), transparent 55%),
+      var(--bg-deep);
+    color: var(--paper-soft);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  h1,h2,h3{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    color: var(--paper);
+  }
+
+  /* Navigation Bar */
+  .top-nav{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 5vw;
+    background: rgba(13, 5, 10, 0.82);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .nav-back{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--gold-pale);
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-gold);
+    background: rgba(242, 195, 102, 0.05);
+  }
+  .nav-back:hover{
+    background: rgba(242, 195, 102, 0.18);
+    transform: translateX(-3px);
+    color: var(--paper);
+  }
+  .nav-title{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--paper);
+    font-style: italic;
+  }
+  .nav-badge{
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--rose);
+    border: 1px solid var(--border-subtle);
+    padding: 0.25rem 0.7rem;
+    border-radius: 12px;
+  }
+
+  /* Header Section */
+  .chapter-hero{
+    text-align: center;
+    padding: 4.5rem 6vw 2.5rem;
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .chapter-tag{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold-pale);
+    font-size: 1.25rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+  }
+  .chapter-hero h1{
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 25px rgba(224, 87, 145, 0.35);
+  }
+  .chapter-desc{
+    font-size: 1.1rem;
+    color: var(--wine-soft);
+    max-width: 580px;
+    margin: 0 auto;
+    font-weight: 300;
+  }
+  .polaroid-badge{
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-family: 'Caveat', cursive;
+    font-size: 1.35rem;
+    color: var(--gold);
+    transform: rotate(-2deg);
+  }
+
+  /* Polaroid Scrapbook Gallery */
+  .scrapbook-grid{
+    max-width: 1200px;
+    margin: 2rem auto 5rem;
+    padding: 0 5vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+  }
+  .polaroid-card{
+    background: #FFFDF9;
+    padding: 1.1rem 1.1rem 1.8rem;
+    border-radius: 4px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(229, 111, 155, 0.15);
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(.2,.7,.2,1), box-shadow 0.4s ease;
+    position: relative;
+  }
+  .polaroid-card:nth-child(odd){
+    transform: rotate(-1.5deg);
+  }
+  .polaroid-card:nth-child(even){
+    transform: rotate(1.5deg);
+  }
+  .polaroid-card:hover{
+    transform: translateY(-8px) rotate(0deg) scale(1.02);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 30px rgba(240, 156, 184, 0.35);
+    z-index: 10;
+  }
+  .polaroid-tape{
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 24px;
+    background: rgba(242, 195, 102, 0.45);
+    backdrop-filter: blur(4px);
+    border-left: 2px dashed rgba(255,255,255,0.4);
+    border-right: 2px dashed rgba(255,255,255,0.4);
+    opacity: 0.8;
+  }
+  .polaroid-frame{
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: #200D1C;
+    overflow: hidden;
+    position: relative;
+    border-radius: 2px;
+  }
+  .polaroid-frame img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .polaroid-card:hover .polaroid-frame img{
+    transform: scale(1.04);
+  }
+  .polaroid-note{
+    margin-top: 1rem;
+    font-family: 'Caveat', cursive;
+    font-size: 1.4rem;
+    color: #331526;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .polaroid-date{
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8C5D76;
+    display: block;
+    margin-top: 0.3rem;
+  }
+
+  /* Video Feature Section */
+  .video-showcase{
+    max-width: 900px;
+    margin: 3rem auto 6rem;
+    padding: 0 5vw;
+    text-align: center;
+  }
+  .video-card{
+    background: var(--bg-surface);
+    border: 1px solid var(--border-gold);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(229, 111, 155, 0.15);
+  }
+  .video-title{
+    font-size: 1.8rem;
+    color: var(--paper);
+    margin-bottom: 0.5rem;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .video-caption{
+    font-size: 0.95rem;
+    color: var(--wine-soft);
+    margin-bottom: 1.5rem;
+  }
+  .video-player{
+    width: 100%;
+    max-height: 520px;
+    border-radius: 8px;
+    background: #000;
+    outline: none;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  }
+
+  /* Chapter Navigation Footer */
+  .chapter-footer-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto 4rem;
+    padding: 2rem 5vw;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .footer-nav-btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--paper);
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    padding: 0.8rem 1.4rem;
+    border-radius: 30px;
+    border: 1px solid var(--border-gold);
+    background: var(--bg-surface);
+    transition: all 0.3s ease;
+  }
+  .footer-nav-btn:hover{
+    background: var(--rose-deep);
+    border-color: var(--rose);
+    color: #FFF;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(224, 87, 145, 0.4);
+  }
+
+  /* Lightbox Modal */
+  .lightbox-modal{
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(8, 3, 7, 0.94);
+    backdrop-filter: blur(16px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .lightbox-modal.active{ display: flex; }
+  .lightbox-content{
+    position: relative;
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .lightbox-img{
+    max-width: 100%;
+    max-height: 75vh;
+    border-radius: 6px;
+    border: 1px solid var(--border-gold);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+    object-fit: contain;
+  }
+  .lightbox-caption{
+    margin-top: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--paper);
+    text-align: center;
+    font-style: italic;
+  }
+  .lightbox-close{
+    position: absolute;
+    top: -45px;
+    right: 0;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--border-gold);
+    color: var(--paper);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .lightbox-close:hover{ background: var(--rose-deep); }
+  .lightbox-nav{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(20, 8, 16, 0.85);
+    border: 1px solid var(--border-gold);
+    color: var(--gold-pale);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    transition: all 0.3s;
+  }
+  .lightbox-nav:hover{ background: var(--rose-deep); color: #fff; }
+  .lightbox-nav.prev{ left: -60px; }
+  .lightbox-nav.next{ right: -60px; }
+
+  @media (max-width: 768px){
+    .scrapbook-grid{ grid-template-columns: 1fr; gap: 2rem; }
+    .lightbox-nav.prev{ left: 10px; }
+    .lightbox-nav.next{ right: 10px; }
+    .chapter-hero h1{ font-size: 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<header class="top-nav">
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <span>All Chapters</span>
+  </a>
+  <div class="nav-title">Sugi &amp; Arun — Forever &amp; Always</div>
+  <div class="nav-badge">Chapter 01 &bull; June 21</div>
+</header>
+
+<!-- Chapter Hero -->
+<section class="chapter-hero">
+  <span class="chapter-tag">Chapter I &bull; June 21 &bull; The Spark</span>
+  <h1>First Meet</h1>
+  <p class="chapter-desc">The shy smiles, the unscripted laughter, and that quiet certainty that something truly magical had just begun on June 21.</p>
+  <div class="polaroid-badge">&ldquo;The very first time our eyes met — June 21...&rdquo; ✨</div>
+</section>
+
+<!-- Polaroid Scrapbook Grid -->
+<main class="scrapbook-grid">
+
+  <div class="polaroid-card" onclick="openLightbox(0)">
+    <div class="polaroid-tape"></div>
+    <div class="polaroid-frame">
+      <img src="photos/FirstMeet/WhatsApp%20Image%202026-10-02%20at%208.47.12%20AM.jpeg" alt="First Meet Memory 1" loading="lazy">
+    </div>
+    <div class="polaroid-note">That unforgettable first smile 💕</div>
+    <span class="polaroid-date">First Meet &bull; Moment 01</span>
+  </div>
+
+  <div class="polaroid-card" onclick="openLightbox(1)">
+    <div class="polaroid-tape"></div>
+    <div class="polaroid-frame">
+      <img src="photos/FirstMeet/WhatsApp%20Image%202026-10-02%20at%208.47.12%20AM%20(1).jpeg" alt="First Meet Memory 2" loading="lazy">
+    </div>
+    <div class="polaroid-note">Little conversations turning into hours 🌸</div>
+    <span class="polaroid-date">First Meet &bull; Moment 02</span>
+  </div>
+
+  <div class="polaroid-card" onclick="openLightbox(2)">
+    <div class="polaroid-tape"></div>
+    <div class="polaroid-frame">
+      <img src="photos/FirstMeet/WhatsApp%20Image%202026-10-02%20at%208.47.12%20AM%20(2).jpeg" alt="First Meet Memory 3" loading="lazy">
+    </div>
+    <div class="polaroid-note">A candid spark we'll cherish forever ✨</div>
+    <span class="polaroid-date">First Meet &bull; Moment 03</span>
+  </div>
+
+  <div class="polaroid-card" onclick="openLightbox(3)">
+    <div class="polaroid-tape"></div>
+    <div class="polaroid-frame">
+      <img src="photos/FirstMeet/WhatsApp%20Image%202026-10-02%20at%208.47.12%20AM%20(3).jpeg" alt="First Meet Memory 4" loading="lazy">
+    </div>
+    <div class="polaroid-note">The beginning of our lifetime story 💖</div>
+    <span class="polaroid-date">First Meet &bull; Moment 04</span>
+  </div>
+
+</main>
+
+<!-- Video Feature -->
+<section class="video-showcase">
+  <div class="video-card">
+    <h2 class="video-title">A Living Memory in Motion</h2>
+    <p class="video-caption">Captured in real-time — the real laughter and genuine warmth of our first day together.</p>
+    <video class="video-player" controls preload="metadata">
+      <source src="photos/FirstMeet/WhatsApp%20Video%202026-10-02%20at%208.47.13%20AM.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</section>
+
+<!-- Navigation between chapters -->
+<div class="chapter-footer-nav">
+  <a href="index.html" class="footer-nav-btn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+    <span>Home Overview</span>
+  </a>
+  <a href="register-marriage.html" class="footer-nav-btn">
+    <span>Next: Register Marriage (June 24)</span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</div>
+
+<!-- Lightbox Modal -->
+<div class="lightbox-modal" id="lightboxModal" onclick="handleBackdropClick(event)">
+  <div class="lightbox-content">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <button class="lightbox-nav prev" onclick="changeImage(-1)">&#10094;</button>
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Fullscreen view">
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+    <button class="lightbox-nav next" onclick="changeImage(1)">&#10095;</button>
+  </div>
+</div>
+
+<script>
+  const photoList = [
+    { src: 'photos/FirstMeet/WhatsApp Image 2026-10-02 at 8.47.12 AM.jpeg', caption: 'That unforgettable first smile 💕' },
+    { src: 'photos/FirstMeet/WhatsApp Image 2026-10-02 at 8.47.12 AM (1).jpeg', caption: 'Little conversations turning into hours 🌸' },
+    { src: 'photos/FirstMeet/WhatsApp Image 2026-10-02 at 8.47.12 AM (2).jpeg', caption: 'A candid spark we\'ll cherish forever ✨' },
+    { src: 'photos/FirstMeet/WhatsApp Image 2026-10-02 at 8.47.12 AM (3).jpeg', caption: 'The beginning of our lifetime story 💖' }
+  ];
+
+  let currentIndex = 0;
+  const modal = document.getElementById('lightboxModal');
+  const imgElement = document.getElementById('lightboxImg');
+  const captionElement = document.getElementById('lightboxCaption');
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateLightbox();
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function changeImage(direction) {
+    currentIndex = (currentIndex + direction + photoList.length) % photoList.length;
+    updateLightbox();
+  }
+
+  function updateLightbox() {
+    imgElement.src = photoList[currentIndex].src;
+    captionElement.textContent = photoList[currentIndex].caption;
+  }
+
+  function handleBackdropClick(e) {
+    if (e.target === modal) closeLightbox();
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (!modal.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') changeImage(-1);
+    if (e.key === 'ArrowRight') changeImage(1);
+  });
+</script>
+
+</body>
+</html>

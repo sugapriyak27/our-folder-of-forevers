@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flowering Ceremony — Sugi &amp; Arun</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&family=Cinzel:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep: #0C0409;
+    --bg-surface: #180914;
+    --bg-card: #200D1C;
+    --paper: #FFF7F0;
+    --paper-soft: #ECD7E1;
+    --gold: #F2C366;
+    --gold-pale: #FCEBC2;
+    --gold-deep: #D49D35;
+    --gold-rich: #E5A93C;
+    --rose: #F09CB8;
+    --rose-deep: #D94884;
+    --border-gold: rgba(242, 195, 102, 0.35);
+    --border-gold-glow: rgba(242, 195, 102, 0.7);
+  }
+  *{ box-sizing: border-box; margin: 0; padding: 0; }
+  body{
+    background:
+      radial-gradient(ellipse 1000px 600px at 50% 0%, rgba(212, 157, 53, 0.2), transparent 60%),
+      radial-gradient(ellipse 800px 600px at 10% 40%, rgba(217, 72, 132, 0.15), transparent 55%),
+      radial-gradient(ellipse 900px 700px at 90% 80%, rgba(242, 195, 102, 0.12), transparent 60%),
+      var(--bg-deep);
+    color: var(--paper-soft);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  h1,h2,h3,.serif{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    color: var(--paper);
+  }
+
+  /* Navigation Bar */
+  .top-nav{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 5vw;
+    background: rgba(12, 4, 9, 0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-gold);
+  }
+  .nav-back{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--gold-pale);
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-gold);
+    background: rgba(242, 195, 102, 0.08);
+  }
+  .nav-back:hover{
+    background: var(--gold-rich);
+    color: #12050D;
+    transform: translateX(-3px);
+  }
+  .nav-title{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--paper);
+    font-style: italic;
+  }
+  .nav-badge{
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    border: 1px solid var(--border-gold);
+    padding: 0.25rem 0.7rem;
+    border-radius: 12px;
+  }
+
+  /* Hero Header */
+  .ceremony-hero{
+    text-align: center;
+    padding: 5rem 6vw 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .ceremony-ornament{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .ceremony-ornament .line{
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .ceremony-ornament span{
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .ceremony-hero h1{
+    font-size: clamp(2.8rem, 6vw, 4.8rem);
+    line-height: 1.08;
+    color: var(--paper);
+    text-shadow: 0 4px 30px rgba(242, 195, 102, 0.3);
+    margin-bottom: 1.2rem;
+  }
+  .ceremony-desc{
+    font-size: 1.15rem;
+    color: var(--paper-soft);
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* Spotlight Feature Item */
+  .spotlight-wrap{
+    max-width: 1200px;
+    margin: 1rem auto 4rem;
+    padding: 0 5vw;
+  }
+  .spotlight-card{
+    background: var(--bg-card);
+    border: 1px solid var(--border-gold);
+    border-radius: 14px;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: minmax(300px, 440px) 1fr;
+    gap: 2.5rem;
+    align-items: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(212, 157, 53, 0.15);
+    cursor: pointer;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+  }
+  .spotlight-card:hover{
+    transform: translateY(-4px);
+    border-color: var(--border-gold-glow);
+  }
+  .spotlight-media{
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    width: 100%;
+    max-height: 520px;
+    background: #0B0308;
+    border: 1px solid rgba(242, 195, 102, 0.25);
+  }
+  .spotlight-media img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 32%;
+    transition: transform 0.8s ease;
+  }
+  .spotlight-card:hover .spotlight-media img{
+    transform: scale(1.05);
+  }
+  .spotlight-info h3{
+    font-size: 2.2rem;
+    margin-bottom: 0.8rem;
+    color: var(--gold-pale);
+  }
+  .spotlight-info p{
+    font-size: 1.05rem;
+    color: var(--paper-soft);
+    margin-bottom: 1.5rem;
+  }
+  .view-highres-btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    background: rgba(242, 195, 102, 0.12);
+    border: 1px solid var(--gold);
+    color: var(--gold-pale);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* Royal Photo Gallery */
+  .royal-gallery-section{
+    max-width: 1200px;
+    margin: 0 auto 6rem;
+    padding: 0 5vw;
+  }
+  .gallery-section-title{
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 2.5rem;
+    color: var(--paper);
+  }
+  .royal-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+  .royal-frame-card{
+    background: var(--bg-card);
+    border: 1px solid var(--border-gold);
+    border-radius: 8px;
+    padding: 1rem;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    transition: all 0.4s cubic-bezier(.2,.7,.2,1);
+    overflow: hidden;
+  }
+  .royal-frame-card:hover{
+    transform: translateY(-6px);
+    border-color: var(--gold);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.8), 0 0 25px rgba(242, 195, 102, 0.25);
+  }
+  .royal-corner{
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--gold);
+    pointer-events: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .royal-corner.tl{ top: 8px; left: 8px; border-right: 0; border-bottom: 0; }
+  .royal-corner.tr{ top: 8px; right: 8px; border-left: 0; border-bottom: 0; }
+  .royal-corner.bl{ bottom: 8px; left: 8px; border-right: 0; border-top: 0; }
+  .royal-corner.br{ bottom: 8px; right: 8px; border-left: 0; border-top: 0; }
+  .royal-frame-card:hover .royal-corner{ opacity: 1; border-color: var(--gold-pale); }
+
+  .royal-img-wrap{
+    width: 100%;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #0B0308;
+  }
+  .royal-img-wrap img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.7s ease;
+  }
+  .royal-frame-card:hover .royal-img-wrap img{
+    transform: scale(1.05);
+  }
+  .royal-card-meta{
+    padding: 0.9rem 0.4rem 0.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .royal-card-meta h4{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    color: var(--paper);
+  }
+  .royal-card-meta span{
+    font-size: 0.8rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+  }
+
+  /* Chapter Navigation Footer */
+  .chapter-footer-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto 4rem;
+    padding: 2rem 5vw;
+    border-top: 1px solid var(--border-gold);
+  }
+  .footer-nav-btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--paper);
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    padding: 0.8rem 1.4rem;
+    border-radius: 30px;
+    border: 1px solid var(--border-gold);
+    background: var(--bg-card);
+    transition: all 0.3s ease;
+  }
+  .footer-nav-btn:hover{
+    background: var(--gold-rich);
+    color: #12050D;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(242, 195, 102, 0.4);
+  }
+
+  /* Lightbox Modal */
+  .lightbox-modal{
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(7, 2, 5, 0.96);
+    backdrop-filter: blur(16px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .lightbox-modal.active{ display: flex; }
+  .lightbox-content{
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .lightbox-img{
+    max-width: 100%;
+    max-height: 78vh;
+    border-radius: 6px;
+    border: 1px solid var(--gold);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.95);
+    object-fit: contain;
+  }
+  .lightbox-caption{
+    margin-top: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    color: var(--gold-pale);
+    text-align: center;
+  }
+  .lightbox-close{
+    position: absolute;
+    top: -45px;
+    right: 0;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--gold);
+    color: var(--paper);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .lightbox-close:hover{ background: var(--gold-rich); color: #12050D; }
+  .lightbox-nav{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(20, 8, 16, 0.9);
+    border: 1px solid var(--gold);
+    color: var(--gold-pale);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    transition: all 0.3s;
+  }
+  .lightbox-nav:hover{ background: var(--gold-rich); color: #12050D; }
+  .lightbox-nav.prev{ left: -65px; }
+  .lightbox-nav.next{ right: -65px; }
+
+  @media (max-width: 850px){
+    .spotlight-card{ grid-template-columns: 1fr; }
+    .spotlight-media{ height: 320px; }
+    .lightbox-nav.prev{ left: 10px; }
+    .lightbox-nav.next{ right: 10px; }
+    .ceremony-hero h1{ font-size: 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<header class="top-nav">
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <span>All Chapters</span>
+  </a>
+  <div class="nav-title">Sugi &amp; Arun — Forever &amp; Always</div>
+  <div class="nav-badge">Chapter 04 &bull; July 12</div>
+</header>
+
+<!-- Hero Section -->
+<section class="ceremony-hero">
+  <div class="ceremony-ornament">
+    <div class="line"></div>
+    <span>July 12 &bull; Sacred Celebrations</span>
+    <div class="line"></div>
+  </div>
+  <h1>Flowering Ceremony</h1>
+  <p class="ceremony-desc">Celebrated on July 12 — draped in radiant silks and showered with the blessings of elders and loved ones. A golden milestone surrounded by culture, grace, and joy.</p>
+</section>
+
+<!-- Spotlight Feature Item -->
+<div class="spotlight-wrap">
+  <div class="spotlight-card" onclick="openLightbox(0)">
+    <div class="spotlight-media">
+      <img src="photos/FloweringCeremony/4Q0A4082.JPG" alt="Flowering Ceremony Portrait" loading="lazy">
+    </div>
+    <div class="spotlight-info">
+      <h3>The Grand Golden Presence</h3>
+      <p>Every blessing, the radiant glow of tradition, and tender smiles woven into this sacred day.</p>
+      <div class="view-highres-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        <span>View Full Masterpiece</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Royal Gallery Section -->
+<section class="royal-gallery-section">
+  <h2 class="gallery-section-title">Ceremonial Keepsakes</h2>
+  <div class="royal-grid">
+
+    <div class="royal-frame-card" onclick="openLightbox(0)">
+      <div class="royal-corner tl"></div><div class="royal-corner tr"></div>
+      <div class="royal-corner bl"></div><div class="royal-corner br"></div>
+      <div class="royal-img-wrap">
+        <img src="photos/FloweringCeremony/4Q0A4082.JPG" alt="Golden Presence" style="object-position: center 32%;" loading="lazy">
+      </div>
+      <div class="royal-card-meta">
+        <h4>Golden Radiance</h4>
+        <span>Photo 01</span>
+      </div>
+    </div>
+
+    <div class="royal-frame-card" onclick="openLightbox(1)">
+      <div class="royal-corner tl"></div><div class="royal-corner tr"></div>
+      <div class="royal-corner bl"></div><div class="royal-corner br"></div>
+      <div class="royal-img-wrap">
+        <img src="photos/FloweringCeremony/4Q0A4045.JPG" alt="Traditional Elegance" loading="lazy">
+      </div>
+      <div class="royal-card-meta">
+        <h4>Sacred Traditions</h4>
+        <span>Photo 02</span>
+      </div>
+    </div>
+
+    <div class="royal-frame-card" onclick="openLightbox(2)">
+      <div class="royal-corner tl"></div><div class="royal-corner tr"></div>
+      <div class="royal-corner bl"></div><div class="royal-corner br"></div>
+      <div class="royal-img-wrap">
+        <img src="photos/FloweringCeremony/4Q0A4092.JPG" alt="Warmth & Celebration" loading="lazy">
+      </div>
+      <div class="royal-card-meta">
+        <h4>Family &amp; Joy</h4>
+        <span>Photo 03</span>
+      </div>
+    </div>
+
+    <div class="royal-frame-card" onclick="openLightbox(3)">
+      <div class="royal-corner tl"></div><div class="royal-corner tr"></div>
+      <div class="royal-corner bl"></div><div class="royal-corner br"></div>
+      <div class="royal-img-wrap">
+        <img src="photos/FloweringCeremony/4Q0A4101.JPG" alt="Golden Moments" loading="lazy">
+      </div>
+      <div class="royal-card-meta">
+        <h4>Cherished Smiles</h4>
+        <span>Photo 04</span>
+      </div>
+    </div>
+
+    <div class="royal-frame-card" onclick="openLightbox(4)">
+      <div class="royal-corner tl"></div><div class="royal-corner tr"></div>
+      <div class="royal-corner bl"></div><div class="royal-corner br"></div>
+      <div class="royal-img-wrap">
+        <img src="photos/FloweringCeremony/4Q0A4111.JPG" alt="Forever Memories" loading="lazy">
+      </div>
+      <div class="royal-card-meta">
+        <h4>Eternal Memories</h4>
+        <span>Photo 05</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Chapter Navigation Footer -->
+<div class="chapter-footer-nav">
+  <a href="cute-dates.html" class="footer-nav-btn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <span>Prev: Cute Dates</span>
+  </a>
+  <a href="send-off.html" class="footer-nav-btn">
+    <span>Next: Send Off (July 16)</span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</div>
+
+<!-- Lightbox Modal -->
+<div class="lightbox-modal" id="lightboxModal" onclick="handleBackdropClick(event)">
+  <div class="lightbox-content">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <button class="lightbox-nav prev" onclick="changeImage(-1)">&#10094;</button>
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Ceremony Fullscreen View">
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+    <button class="lightbox-nav next" onclick="changeImage(1)">&#10095;</button>
+  </div>
+</div>
+
+<script>
+  const photoList = [
+    { src: 'photos/FloweringCeremony/4Q0A4082.JPG', caption: 'The Grand Presence — Golden radiance & cherished smiles (July 12)' },
+    { src: 'photos/FloweringCeremony/4Q0A4045.JPG', caption: 'Sacred Traditions held with devotion (July 12)' },
+    { src: 'photos/FloweringCeremony/4Q0A4092.JPG', caption: 'Family, Warmth and celebratory joys (July 12)' },
+    { src: 'photos/FloweringCeremony/4Q0A4101.JPG', caption: 'The Golden Glow of tradition (July 12)' },
+    { src: 'photos/FloweringCeremony/4Q0A4111.JPG', caption: 'Eternal memories kept safe for a lifetime (July 12)' }
+  ];
+
+  let currentIndex = 0;
+  const modal = document.getElementById('lightboxModal');
+  const imgElement = document.getElementById('lightboxImg');
+  const captionElement = document.getElementById('lightboxCaption');
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateLightbox();
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function changeImage(direction) {
+    currentIndex = (currentIndex + direction + photoList.length) % photoList.length;
+    updateLightbox();
+  }
+
+  function updateLightbox() {
+    imgElement.src = photoList[currentIndex].src;
+    captionElement.textContent = photoList[currentIndex].caption + ` (${currentIndex + 1} of ${photoList.length})`;
+  }
+
+  function handleBackdropClick(e) {
+    if (e.target === modal) closeLightbox();
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (!modal.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') changeImage(-1);
+    if (e.key === 'ArrowRight') changeImage(1);
+  });
+</script>
+
+</body>
+</html>

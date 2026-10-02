@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Send Off — Sugi &amp; Arun</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep: #09050C;
+    --bg-surface: #14091A;
+    --bg-card: #1D0E25;
+    --paper: #FFF7FA;
+    --paper-soft: #E6D2E0;
+    --lavender: #C2A5E0;
+    --rose: #F09CB8;
+    --rose-deep: #D44B83;
+    --gold: #F2C366;
+    --gold-pale: #FAE7AD;
+    --border-lavender: rgba(194, 165, 224, 0.25);
+    --border-glow: rgba(194, 165, 224, 0.6);
+  }
+  *{ box-sizing: border-box; margin: 0; padding: 0; }
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 50% 0%, rgba(194, 165, 224, 0.18), transparent 60%),
+      radial-gradient(ellipse 800px 600px at 100% 30%, rgba(212, 75, 131, 0.14), transparent 55%),
+      radial-gradient(ellipse 800px 700px at 0% 80%, rgba(242, 195, 102, 0.10), transparent 60%),
+      var(--bg-deep);
+    color: var(--paper-soft);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  h1,h2,h3{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    color: var(--paper);
+  }
+
+  /* Navigation Bar */
+  .top-nav{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 5vw;
+    background: rgba(9, 5, 12, 0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-lavender);
+  }
+  .nav-back{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--lavender);
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-lavender);
+    background: rgba(194, 165, 224, 0.08);
+  }
+  .nav-back:hover{
+    background: var(--lavender);
+    color: #12041A;
+    transform: translateX(-3px);
+  }
+  .nav-title{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--paper);
+    font-style: italic;
+  }
+  .nav-badge{
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--lavender);
+    border: 1px solid var(--border-lavender);
+    padding: 0.25rem 0.7rem;
+    border-radius: 12px;
+  }
+
+  /* Hero Section */
+  .sendoff-hero{
+    text-align: center;
+    padding: 4.5rem 6vw 2.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .sendoff-tag{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--lavender);
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+  }
+  .sendoff-hero h1{
+    font-size: clamp(2.8rem, 6vw, 4.6rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 30px rgba(194, 165, 224, 0.35);
+  }
+  .sendoff-desc{
+    font-size: 1.15rem;
+    color: var(--paper-soft);
+    max-width: 620px;
+    margin: 0 auto;
+  }
+  .romantic-quote{
+    margin-top: 1.8rem;
+    font-family: 'Alex Brush', cursive;
+    font-size: 2.2rem;
+    color: var(--gold-pale);
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 15px rgba(242, 195, 102, 0.4);
+  }
+
+  /* Sentimental Glass Cards */
+  .sendoff-grid{
+    max-width: 1200px;
+    margin: 2rem auto 5rem;
+    padding: 0 5vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  .sendoff-card{
+    background: var(--bg-card);
+    border: 1px solid var(--border-lavender);
+    border-radius: 14px;
+    padding: 1.2rem;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 0 20px rgba(194, 165, 224, 0.12);
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(.2,.7,.2,1), box-shadow 0.4s ease, border-color 0.4s ease;
+  }
+  .sendoff-card:hover{
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--border-glow);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(194, 165, 224, 0.3);
+  }
+  .sendoff-media-box{
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    background: #0E0513;
+  }
+  .sendoff-media-box img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s ease;
+  }
+  .sendoff-card:hover .sendoff-media-box img{
+    transform: scale(1.06);
+  }
+  .sendoff-card-content{
+    padding-top: 1.1rem;
+  }
+  .sendoff-card-title{
+    font-size: 1.45rem;
+    color: var(--paper);
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 0.3rem;
+  }
+  .sendoff-card-sub{
+    font-size: 0.9rem;
+    color: var(--lavender);
+    opacity: 0.9;
+  }
+
+  /* Video Feature */
+  .video-showcase{
+    max-width: 900px;
+    margin: 3rem auto 6rem;
+    padding: 0 5vw;
+    text-align: center;
+  }
+  .video-card{
+    background: var(--bg-card);
+    border: 1px solid var(--border-lavender);
+    border-radius: 16px;
+    padding: 1.8rem;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 30px rgba(194, 165, 224, 0.15);
+  }
+  .video-title{
+    font-size: 2rem;
+    color: var(--paper);
+    margin-bottom: 0.5rem;
+  }
+  .video-caption{
+    font-size: 0.98rem;
+    color: var(--paper-soft);
+    margin-bottom: 1.5rem;
+  }
+  .video-player{
+    width: 100%;
+    max-height: 520px;
+    border-radius: 10px;
+    background: #000;
+    outline: none;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  }
+
+  /* Chapter Navigation Footer */
+  .chapter-footer-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto 4rem;
+    padding: 2rem 5vw;
+    border-top: 1px solid var(--border-lavender);
+  }
+  .footer-nav-btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--paper);
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    padding: 0.8rem 1.4rem;
+    border-radius: 30px;
+    border: 1px solid var(--border-lavender);
+    background: var(--bg-surface);
+    transition: all 0.3s ease;
+  }
+  .footer-nav-btn:hover{
+    background: var(--lavender);
+    color: #12041A;
+    border-color: var(--paper);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(194, 165, 224, 0.4);
+  }
+
+  /* Lightbox Modal */
+  .lightbox-modal{
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(8, 3, 11, 0.95);
+    backdrop-filter: blur(16px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .lightbox-modal.active{ display: flex; }
+  .lightbox-content{
+    position: relative;
+    max-width: 90vw;
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .lightbox-img{
+    max-width: 100%;
+    max-height: 76vh;
+    border-radius: 8px;
+    border: 1px solid var(--lavender);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+    object-fit: contain;
+  }
+  .lightbox-caption{
+    margin-top: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--paper);
+    text-align: center;
+    font-style: italic;
+  }
+  .lightbox-close{
+    position: absolute;
+    top: -45px;
+    right: 0;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--lavender);
+    color: var(--paper);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .lightbox-close:hover{ background: var(--lavender); color: #12041A; }
+  .lightbox-nav{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(22, 10, 29, 0.85);
+    border: 1px solid var(--lavender);
+    color: var(--lavender);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    transition: all 0.3s;
+  }
+  .lightbox-nav:hover{ background: var(--lavender); color: #12041A; }
+  .lightbox-nav.prev{ left: -60px; }
+  .lightbox-nav.next{ right: -60px; }
+
+  @media (max-width: 768px){
+    .sendoff-grid{ grid-template-columns: 1fr; }
+    .lightbox-nav.prev{ left: 10px; }
+    .lightbox-nav.next{ right: 10px; }
+    .sendoff-hero h1{ font-size: 2.5rem; }
+    .romantic-quote{ font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<header class="top-nav">
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <span>All Chapters</span>
+  </a>
+  <div class="nav-title">Sugi &amp; Arun — Forever &amp; Always</div>
+  <div class="nav-badge">Chapter 05 &bull; July 16</div>
+</header>
+
+<!-- Hero Section -->
+<section class="sendoff-hero">
+  <span class="sendoff-tag">Chapter V &bull; July 16 &bull; Loving Farewells</span>
+  <h1>The Send Off</h1>
+  <p class="sendoff-desc">July 16 — tight hugs that didn't want to let go, lingering promises, and the quiet assurance that no matter the miles, our hearts beat in unison.</p>
+  <div class="romantic-quote">&ldquo;Distance means so little when you mean so much...&rdquo;</div>
+</section>
+
+<!-- Gallery Grid -->
+<main class="sendoff-grid">
+
+  <div class="sendoff-card" onclick="openLightbox(0)">
+    <div class="sendoff-media-box">
+      <img src="photos/SendOff/WhatsApp%20Image%202026-10-02%20at%208.50.46%20AM%20(3).jpeg" alt="Send Off Memory 1" loading="lazy">
+    </div>
+    <div class="sendoff-card-content">
+      <h3 class="sendoff-card-title">Cherished Goodbyes</h3>
+      <p class="sendoff-card-sub">That lingering warmth &amp; promises right before saying goodbye.</p>
+    </div>
+  </div>
+
+  <div class="sendoff-card" onclick="openLightbox(1)">
+    <div class="sendoff-media-box">
+      <img src="photos/SendOff/WhatsApp%20Image%202026-10-02%20at%208.50.46%20AM%20(2).jpeg" alt="Send Off Memory 2" loading="lazy">
+    </div>
+    <div class="sendoff-card-content">
+      <h3 class="sendoff-card-title">Family Warmth</h3>
+      <p class="sendoff-card-sub">Surrounded by love and blessings for the journey ahead.</p>
+    </div>
+  </div>
+
+  <div class="sendoff-card" onclick="openLightbox(2)">
+    <div class="sendoff-media-box">
+      <img src="photos/SendOff/WhatsApp%20Image%202026-10-02%20at%208.50.46%20AM%20(1).jpeg" alt="Send Off Memory 3" loading="lazy">
+    </div>
+    <div class="sendoff-card-content">
+      <h3 class="sendoff-card-title">Smiles at the Terminal</h3>
+      <p class="sendoff-card-sub">Every glance speaking what words cannot say.</p>
+    </div>
+  </div>
+
+  <div class="sendoff-card" onclick="openLightbox(3)">
+    <div class="sendoff-media-box">
+      <img src="photos/SendOff/WhatsApp%20Image%202026-10-02%20at%208.50.46%20AM.jpeg" alt="Send Off Memory 4" loading="lazy">
+    </div>
+    <div class="sendoff-card-content">
+      <h3 class="sendoff-card-title">Forever In My Heart</h3>
+      <p class="sendoff-card-sub">Carry my heart with you wherever you go.</p>
+    </div>
+  </div>
+
+</main>
+
+<!-- Video Feature -->
+<section class="video-showcase">
+  <div class="video-card">
+    <h2 class="video-title">The Send Off Video Diary</h2>
+    <p class="video-caption">Real emotional moments captured during our send off — watching you leave, but keeping your love close.</p>
+    <video class="video-player" controls preload="metadata">
+      <source src="photos/SendOff/WhatsApp%20Video%202026-10-02%20at%208.51.17%20AM.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</section>
+
+<!-- Chapter Navigation Footer -->
+<div class="chapter-footer-nav">
+  <a href="flowering-ceremony.html" class="footer-nav-btn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <span>Prev: Flowering Ceremony (July 12)</span>
+  </a>
+  <a href="ai-gen-memories.html" class="footer-nav-btn">
+    <span>Next: AI Gen Memories</span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</div>
+
+<!-- Lightbox Modal -->
+<div class="lightbox-modal" id="lightboxModal" onclick="handleBackdropClick(event)">
+  <div class="lightbox-content">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <button class="lightbox-nav prev" onclick="changeImage(-1)">&#10094;</button>
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Fullscreen view">
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+    <button class="lightbox-nav next" onclick="changeImage(1)">&#10095;</button>
+  </div>
+</div>
+
+<script>
+  const photoList = [
+    { src: 'photos/SendOff/WhatsApp Image 2026-10-02 at 8.50.46 AM (3).jpeg', caption: 'Cherished Goodbyes — That lingering warmth & promises at the airport (July 16)' },
+    { src: 'photos/SendOff/WhatsApp Image 2026-10-02 at 8.50.46 AM (2).jpeg', caption: 'Family Warmth — Surrounded by love and blessings' },
+    { src: 'photos/SendOff/WhatsApp Image 2026-10-02 at 8.50.46 AM (1).jpeg', caption: 'Smiles at the Terminal — Counting down until the next time we meet' },
+    { src: 'photos/SendOff/WhatsApp Image 2026-10-02 at 8.50.46 AM.jpeg', caption: 'Forever In My Heart — Love without borders' }
+  ];
+
+  let currentIndex = 0;
+  const modal = document.getElementById('lightboxModal');
+  const imgElement = document.getElementById('lightboxImg');
+  const captionElement = document.getElementById('lightboxCaption');
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateLightbox();
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function changeImage(direction) {
+    currentIndex = (currentIndex + direction + photoList.length) % photoList.length;
+    updateLightbox();
+  }
+
+  function updateLightbox() {
+    imgElement.src = photoList[currentIndex].src;
+    captionElement.textContent = photoList[currentIndex].caption;
+  }
+
+  function handleBackdropClick(e) {
+    if (e.target === modal) closeLightbox();
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (!modal.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') changeImage(-1);
+    if (e.key === 'ArrowRight') changeImage(1);
+  });
+</script>
+
+</body>
+</html>

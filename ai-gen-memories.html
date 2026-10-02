@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Gen Memories — Sugi &amp; Arun</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep: #08040C;
+    --bg-surface: #140A1F;
+    --bg-card: rgba(28, 14, 40, 0.7);
+    --paper: #FFF5FD;
+    --paper-soft: #EAD0EB;
+    --prism-pink: #FF66B2;
+    --prism-purple: #B57BFF;
+    --prism-blue: #60A5FA;
+    --prism-gold: #FAD02C;
+    --border-prism: rgba(181, 123, 255, 0.35);
+    --border-glow: rgba(255, 102, 178, 0.6);
+  }
+  *{ box-sizing: border-box; margin: 0; padding: 0; }
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 50% 0%, rgba(181, 123, 255, 0.22), transparent 60%),
+      radial-gradient(ellipse 700px 600px at 100% 50%, rgba(255, 102, 178, 0.18), transparent 55%),
+      radial-gradient(ellipse 800px 600px at 0% 80%, rgba(96, 165, 250, 0.15), transparent 55%),
+      var(--bg-deep);
+    color: var(--paper-soft);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  h1,h2,h3{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    color: var(--paper);
+  }
+
+  /* Navigation Bar */
+  .top-nav{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 5vw;
+    background: rgba(8, 4, 12, 0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-prism);
+  }
+  .nav-back{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--prism-purple);
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-prism);
+    background: rgba(181, 123, 255, 0.08);
+  }
+  .nav-back:hover{
+    background: linear-gradient(135deg, var(--prism-purple), var(--prism-pink));
+    color: #FFF;
+    transform: translateX(-3px);
+  }
+  .nav-title{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--paper);
+    font-style: italic;
+  }
+  .nav-badge{
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    background: linear-gradient(90deg, var(--prism-pink), var(--prism-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border: 1px solid var(--border-prism);
+    padding: 0.25rem 0.7rem;
+    border-radius: 12px;
+  }
+
+  /* Hero Section */
+  .aimem-hero{
+    text-align: center;
+    padding: 4.5rem 6vw 2.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .aimem-tag{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--prism-purple);
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+  }
+  .aimem-hero h1{
+    font-size: clamp(2.8rem, 6vw, 4.6rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 30px rgba(181, 123, 255, 0.4);
+    background: linear-gradient(135deg, #FFF, var(--paper-soft), var(--prism-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .aimem-desc{
+    font-size: 1.15rem;
+    color: var(--paper-soft);
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  /* Holographic Glass Gallery Grid */
+  .prism-grid{
+    max-width: 1200px;
+    margin: 2rem auto 6rem;
+    padding: 0 5vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.2rem;
+  }
+  .prism-card{
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-prism);
+    border-radius: 16px;
+    padding: 1.3rem;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(181, 123, 255, 0.15);
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(.2,.7,.2,1), box-shadow 0.4s ease, border-color 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .prism-card::before{
+    content: '';
+    position: absolute;
+    top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+    transition: left 0.8s ease;
+  }
+  .prism-card:hover::before{
+    left: 100%;
+  }
+  .prism-card:hover{
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--border-glow);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.85), 0 0 35px rgba(255, 102, 178, 0.35);
+  }
+  .prism-media-box{
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    background: #0E0515;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .prism-media-box img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s ease;
+  }
+  .prism-card:hover .prism-media-box img{
+    transform: scale(1.06);
+  }
+  .prism-card-content{
+    padding-top: 1.2rem;
+  }
+  .prism-badge{
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--prism-pink);
+    margin-bottom: 0.3rem;
+  }
+  .prism-card-title{
+    font-size: 1.5rem;
+    color: var(--paper);
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .prism-card-sub{
+    font-size: 0.9rem;
+    color: var(--paper-soft);
+    opacity: 0.85;
+    margin-top: 0.2rem;
+  }
+
+  /* Chapter Navigation Footer */
+  .chapter-footer-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto 4rem;
+    padding: 2rem 5vw;
+    border-top: 1px solid var(--border-prism);
+  }
+  .footer-nav-btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--paper);
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    padding: 0.8rem 1.4rem;
+    border-radius: 30px;
+    border: 1px solid var(--border-prism);
+    background: var(--bg-surface);
+    transition: all 0.3s ease;
+  }
+  .footer-nav-btn:hover{
+    background: linear-gradient(135deg, var(--prism-purple), var(--prism-pink));
+    border-color: var(--paper);
+    color: #FFF;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(181, 123, 255, 0.4);
+  }
+
+  /* Lightbox Modal */
+  .lightbox-modal{
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(7, 3, 10, 0.96);
+    backdrop-filter: blur(16px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .lightbox-modal.active{ display: flex; }
+  .lightbox-content{
+    position: relative;
+    max-width: 90vw;
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .lightbox-img{
+    max-width: 100%;
+    max-height: 76vh;
+    border-radius: 8px;
+    border: 1px solid var(--prism-purple);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+    object-fit: contain;
+  }
+  .lightbox-caption{
+    margin-top: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--paper);
+    text-align: center;
+    font-style: italic;
+  }
+  .lightbox-close{
+    position: absolute;
+    top: -45px;
+    right: 0;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--prism-purple);
+    color: var(--paper);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .lightbox-close:hover{ background: var(--prism-pink); color: #fff; }
+  .lightbox-nav{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(20, 10, 30, 0.85);
+    border: 1px solid var(--prism-purple);
+    color: var(--prism-purple);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    transition: all 0.3s;
+  }
+  .lightbox-nav:hover{ background: var(--prism-pink); color: #fff; }
+  .lightbox-nav.prev{ left: -60px; }
+  .lightbox-nav.next{ right: -60px; }
+
+  @media (max-width: 768px){
+    .prism-grid{ grid-template-columns: 1fr; }
+    .lightbox-nav.prev{ left: 10px; }
+    .lightbox-nav.next{ right: 10px; }
+    .aimem-hero h1{ font-size: 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<header class="top-nav">
+  <a href="index.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <span>All Chapters</span>
+  </a>
+  <div class="nav-title">Sugi &amp; Arun — Forever &amp; Always</div>
+  <div class="nav-badge">Chapter 06</div>
+</header>
+
+<!-- Hero Section -->
+<section class="aimem-hero">
+  <span class="aimem-tag">Chapter VI &bull; Ethereal Dreamscapes</span>
+  <h1>AI Gen Memories</h1>
+  <p class="aimem-desc">Reimagining our journey through digital art and dreams. In every timeline, in every world, we find our way back to each other.</p>
+</section>
+
+<!-- Prism Glass Grid -->
+<main class="prism-grid">
+
+  <div class="prism-card" onclick="openLightbox(0)">
+    <div class="prism-media-box">
+      <img src="photos/AIGenMemories/WhatsApp%20Image%202026-10-02%20at%208.53.18%20AM.jpeg" alt="AI Generated Memory 1" loading="lazy">
+    </div>
+    <div class="prism-card-content">
+      <span class="prism-badge">Universe Alpha</span>
+      <h3 class="prism-card-title">Dreamscape Portrait</h3>
+      <p class="prism-card-sub">Rendered with love across celestial galaxies.</p>
+    </div>
+  </div>
+
+  <div class="prism-card" onclick="openLightbox(1)">
+    <div class="prism-media-box">
+      <img src="photos/AIGenMemories/WhatsApp%20Image%202026-10-02%20at%208.53.19%20AM.jpeg" alt="AI Generated Memory 2" loading="lazy">
+    </div>
+    <div class="prism-card-content">
+      <span class="prism-badge">Universe Beta</span>
+      <h3 class="prism-card-title">Eternal Radiance</h3>
+      <p class="prism-card-sub">Soft glow and timeless companionship.</p>
+    </div>
+  </div>
+
+  <div class="prism-card" onclick="openLightbox(2)">
+    <div class="prism-media-box">
+      <img src="photos/AIGenMemories/WhatsApp%20Image%202026-10-02%20at%208.53.19%20AM%20(1).jpeg" alt="AI Generated Memory 3" loading="lazy">
+    </div>
+    <div class="prism-card-content">
+      <span class="prism-badge">Universe Gamma</span>
+      <h3 class="prism-card-title">Parallel Destinies</h3>
+      <p class="prism-card-sub">Where our hearts meet in vivid colors.</p>
+    </div>
+  </div>
+
+  <div class="prism-card" onclick="openLightbox(3)">
+    <div class="prism-media-box">
+      <img src="photos/AIGenMemories/WhatsApp%20Image%202026-10-02%20at%208.53.19%20AM%20(2).jpeg" alt="AI Generated Memory 4" loading="lazy">
+    </div>
+    <div class="prism-card-content">
+      <span class="prism-badge">Universe Omega</span>
+      <h3 class="prism-card-title">Infinite Forever</h3>
+      <p class="prism-card-sub">A futuristic keepsake for eternity.</p>
+    </div>
+  </div>
+
+</main>
+
+<!-- Chapter Navigation Footer -->
+<div class="chapter-footer-nav">
+  <a href="send-off.html" class="footer-nav-btn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <span>Prev: Send Off (July 16)</span>
+  </a>
+  <a href="surprises.html" class="footer-nav-btn">
+    <span>Next: Special Surprises 🎁</span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</div>
+
+<!-- Lightbox Modal -->
+<div class="lightbox-modal" id="lightboxModal" onclick="handleBackdropClick(event)">
+  <div class="lightbox-content">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <button class="lightbox-nav prev" onclick="changeImage(-1)">&#10094;</button>
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Fullscreen view">
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+    <button class="lightbox-nav next" onclick="changeImage(1)">&#10095;</button>
+  </div>
+</div>
+
+<script>
+  const photoList = [
+    { src: 'photos/AIGenMemories/WhatsApp Image 2026-10-02 at 8.53.18 AM.jpeg', caption: 'Dreamscape Portrait — Rendered across celestial galaxies' },
+    { src: 'photos/AIGenMemories/WhatsApp Image 2026-10-02 at 8.53.19 AM.jpeg', caption: 'Eternal Radiance — Soft glow and timeless love' },
+    { src: 'photos/AIGenMemories/WhatsApp Image 2026-10-02 at 8.53.19 AM (1).jpeg', caption: 'Parallel Destinies — Finding each other in every world' },
+    { src: 'photos/AIGenMemories/WhatsApp Image 2026-10-02 at 8.53.19 AM (2).jpeg', caption: 'Infinite Forever — Written in the stars' }
+  ];
+
+  let currentIndex = 0;
+  const modal = document.getElementById('lightboxModal');
+  const imgElement = document.getElementById('lightboxImg');
+  const captionElement = document.getElementById('lightboxCaption');
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateLightbox();
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function changeImage(direction) {
+    currentIndex = (currentIndex + direction + photoList.length) % photoList.length;
+    updateLightbox();
+  }
+
+  function updateLightbox() {
+    imgElement.src = photoList[currentIndex].src;
+    captionElement.textContent = photoList[currentIndex].caption;
+  }
+
+  function handleBackdropClick(e) {
+    if (e.target === modal) closeLightbox();
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (!modal.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') changeImage(-1);
+    if (e.key === 'ArrowRight') changeImage(1);
+  });
+</script>
+
+</body>
+</html>
